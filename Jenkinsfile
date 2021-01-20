@@ -3,15 +3,17 @@ pipeline {
         dockerfile true
     }
     stages {
-        stage('Preparing') {
-            steps {
-                echo 'Hello'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
+        stage('docker-compose') {
+           steps {
+              sh "docker-compose build"
+              sh "docker-compose up -d"
+              
+           }
+       }
     }
+    post {
+      always {
+         sh "docker-compose down || true"
+      }
+   }
 }
