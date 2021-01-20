@@ -6,7 +6,11 @@ pipeline {
         stage('Preparing') {
             steps {
                 echo 'Hello'
-                sh 'echo myCustomEnvVar = $myCustomEnvVar'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'node --version'
             }
         }
     }
